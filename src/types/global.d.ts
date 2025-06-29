@@ -1,3 +1,5 @@
+import { Request } from 'express';
+
 declare namespace NodeJS {
   interface ProcessEnv {
     NODE_ENV: string;
@@ -15,6 +17,16 @@ declare global {
   var module: NodeModule;
   var __dirname: string;
   var __filename: string;
+}
+
+// Ensure Express Request types are available
+declare module 'express' {
+  interface Request {
+    user?: {
+      id: string;
+      email: string;
+    };
+  }
 }
 
 export {};

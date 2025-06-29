@@ -2,7 +2,6 @@ import express, { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcryptjs';
 import UserModel from '../models/User';
 import { generateToken, authenticateToken } from '../middleware/auth';
-import { AuthRequest } from '../types';
 
 const router = express.Router();
 
@@ -109,7 +108,7 @@ router.post('/register', async (req: Request, res: Response): Promise<void> => {
 });
 
 // Verify token
-router.get('/verify', authenticateToken, async (req: AuthRequest, res: Response, next: NextFunction): Promise<void> => {
+router.get('/verify', authenticateToken, async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     if (!req.user?.id) {
       res.status(401).json({ error: 'Invalid token payload' });
@@ -136,7 +135,7 @@ router.get('/verify', authenticateToken, async (req: AuthRequest, res: Response,
 });
 
 // Logout (client-side token removal)
-router.post('/logout', authenticateToken, (req: AuthRequest, res: Response, next: NextFunction): void => {
+router.post('/logout', authenticateToken, (req: Request, res: Response, next: NextFunction): void => {
   res.json({ message: 'Logged out successfully' });
 });
 
