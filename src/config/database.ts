@@ -4,7 +4,14 @@ const connectDB = async (): Promise<void> => {
   try {
     const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/loopr';
     
-    await mongoose.connect(mongoURI);
+    console.log('🔗 Attempting to connect to MongoDB...');
+    
+    await mongoose.connect(mongoURI, {
+      serverSelectionTimeoutMS: 30000, // 30 seconds
+      connectTimeoutMS: 30000, // 30 seconds
+      socketTimeoutMS: 30000, // 30 seconds
+      maxPoolSize: 10
+    });
     
     console.log('✅ MongoDB connected successfully');
     console.log(`📍 Database: ${mongoose.connection.name}`);
@@ -36,7 +43,10 @@ const connectDB = async (): Promise<void> => {
     
   } catch (error) {
     console.error('❌ MongoDB connection failed:', error);
-    console.error('Make sure MongoDB is running and the connection string is correct');
+    console.error('Please check:');
+    console.error('1. MongoDB Atlas Network Access (IP Whitelist)');
+    console.error('2. Database connection string');
+    console.error('3. Database user permissions');
     process.exit(1);
   }
 };
