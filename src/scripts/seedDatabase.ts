@@ -31,7 +31,7 @@ async function seedDatabase() {
     console.log('👤 Created demo user');
 
     // Read and import transactions from JSON file
-    const transactionsPath = path.join(__dirname, '../../data/transactions.json');
+    const transactionsPath = path.resolve(process.cwd(), 'data/transactions.json');
     
     if (fs.existsSync(transactionsPath)) {
       const rawData = fs.readFileSync(transactionsPath, 'utf8');
@@ -109,7 +109,8 @@ async function seedDatabase() {
   }
 }
 
-if (require.main === module) {
+// Check if this script is being run directly
+if (typeof require !== 'undefined' && require.main === module) {
   seedDatabase();
 }
 

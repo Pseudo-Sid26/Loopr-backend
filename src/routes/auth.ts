@@ -1,7 +1,8 @@
 import express, { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcryptjs';
 import UserModel from '../models/User';
-import { generateToken, authenticateToken, AuthRequest } from '../middleware/auth';
+import { generateToken, authenticateToken } from '../middleware/auth';
+import { AuthRequest } from '../types';
 
 const router = express.Router();
 

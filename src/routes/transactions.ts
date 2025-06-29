@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
-import { authenticateToken, AuthRequest } from '../middleware/auth';
+import { authenticateToken } from '../middleware/auth';
 import transactionService from '../services/transactionService';
-import { TransactionFilters } from '../types';
+import { TransactionFilters, AuthRequest } from '../types';
 
 const router = express.Router();
 

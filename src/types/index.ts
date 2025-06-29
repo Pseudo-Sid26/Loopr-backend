@@ -1,5 +1,13 @@
 import { Request } from 'express';
 
+// Extend Express Request interface
+export interface AuthRequest extends Request {
+  user?: {
+    id: string;
+    email: string;
+  };
+}
+
 export interface Transaction {
   id: string;
   date: string;

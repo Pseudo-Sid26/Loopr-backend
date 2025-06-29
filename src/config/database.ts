@@ -4,16 +4,13 @@ const connectDB = async (): Promise<void> => {
   try {
     const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/loopr';
     
-    await mongoose.connect(mongoURI, {
-      serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
-      socketTimeoutMS: 45000, // Close sockets after 45s of inactivity
-    });
+    await mongoose.connect(mongoURI);
     
     console.log('✅ MongoDB connected successfully');
     console.log(`📍 Database: ${mongoose.connection.name}`);
     
     // Handle connection events
-    mongoose.connection.on('error', (err) => {
+    mongoose.connection.on('error', (err: any) => {
       console.error('❌ MongoDB connection error:', err);
     });
     

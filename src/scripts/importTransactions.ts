@@ -9,7 +9,7 @@ async function importTransactions() {
     await mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://siddhesh26pseudo:n4xMucqSyVBAxSX2@financedb.xkrknnv.mongodb.net/LooprFinDB?retryWrites=true&w=majority&appName=FinanceDB');
     
     // Read JSON file
-    const jsonPath = path.join(__dirname, '../../data/transactions.json');
+    const jsonPath = path.resolve(process.cwd(), 'data/transactions.json');
     const rawData = fs.readFileSync(jsonPath, 'utf8');
     const transactions = JSON.parse(rawData);
     
