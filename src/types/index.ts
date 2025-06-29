@@ -1,3 +1,5 @@
+import { Request } from 'express';
+
 export interface Transaction {
   id: string;
   date: string;
@@ -73,4 +75,12 @@ export interface AuthPayload {
 export interface ExportPreview {
   count: number;
   columns: string[];
+}
+
+// Extend Express Request interface
+export interface AuthRequest extends Request {
+  user?: {
+    id: string;
+    email: string;
+  };
 }
